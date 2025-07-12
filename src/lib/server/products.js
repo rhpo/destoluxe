@@ -1,8 +1,7 @@
 import data from "../data/data.json"
 
 /**
- * Fetch all products
- * @returns {Promise<Array>} Array of products
+ * Fetches all products with a simulated delay.
  */
 export async function fetchProducts() {
   // Simulate API delay
@@ -16,9 +15,12 @@ export async function fetchProducts() {
 }
 
 /**
- * Fetch a single product by ID
- * @param {string} id - Product ID
- * @returns {Promise<Object>} Product object
+ * Fetches a single product by ID from a simulated dataset.
+ * The function simulates an API delay of 100 milliseconds before retrieving the product.
+ * If the product is found, it returns an object with `success` set to true and the product data.
+ * If the product is not found, it returns an object with `success` set to false and an error message.
+ *
+ * @param {string} id - The ID of the product to fetch
  */
 export async function fetchProduct(id) {
   // Simulate API delay
@@ -41,9 +43,11 @@ export async function fetchProduct(id) {
 }
 
 /**
- * Search products by query
- * @param {string} query - Search query
- * @returns {Promise<Array>} Filtered products
+ * Searches products based on a query string.
+ *
+ * This function filters products by matching the query against the product's name, description,
+ * and category. It returns an object containing the filtered products along with a success flag
+ * and the total count of filtered products.
  */
 export async function searchProducts(query) {
   await new Promise((resolve) => setTimeout(resolve, 100))
