@@ -135,7 +135,7 @@
 
   .total {
     text-transform: capitalize;
-    color: green;
+    color: var(--accent-color);
     font-weight: 200;
     font-size: 2rem;
     text-align: center;
