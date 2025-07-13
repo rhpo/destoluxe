@@ -119,7 +119,7 @@
 
       <div class="order-summary">
         <h3>Résumé</h3>
-        {#each formData.cart as item (item.id)}
+        {#each $cart as item (item.id)}
           <div class="order-item">
             <div class="item-details">
               <span class="item-name">{item.name}</span>

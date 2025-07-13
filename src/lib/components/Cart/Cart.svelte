@@ -92,8 +92,6 @@
     overflow: hidden;
     background-color: var(--background-light);
     transition: all var(--transition-duration) var(--transition-easing);
-
-    box-shadow: 0 0 80px 10px rgb(255, 255, 255);
   }
 
   main {
