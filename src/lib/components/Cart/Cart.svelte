@@ -9,13 +9,13 @@
   import { ShoppingCart, X } from "lucide-svelte";
   import { formatPrice } from "$lib/utils/currency";
   import { blur } from "svelte/transition";
+  import { openForm } from "$lib/stores/form";
 
   interface Props {
     view: "desktop" | "mobile";
   }
 
   let { view = "desktop" }: Props = $props();
-  let showForm = $state(false);
 
   $effect(() => {
     if ($cart.length === 0) {
@@ -57,7 +57,7 @@
       </div>
 
       <div class="actions">
-        <Button variant="primary" fullWidth onclick={() => (showForm = true)}>
+        <Button variant="primary" fullWidth onclick={() => openForm()}>
           Passer commande
         </Button>
       </div>
@@ -66,7 +66,7 @@
 </main>
 
 <Portal target="body">
-  <Form bind:show={showForm} />
+  <Form />
 </Portal>
 
 <style>
@@ -87,11 +87,13 @@
     top: var(--navbar-height);
     left: 0;
 
-    height: calc(100vh - var(--navbar-height));
+    height: calc(100svh - var(--navbar-height));
     width: 0;
     overflow: hidden;
     background-color: var(--background-light);
     transition: all var(--transition-duration) var(--transition-easing);
+
+    box-shadow: 0 0 80px 10px rgb(255, 255, 255);
   }
 
   main {
@@ -108,7 +110,7 @@
 
   :global(html.notification-open) main {
     top: calc(var(--header-height));
-    height: calc(100vh - var(--header-height));
+    height: calc(100svh - var(--header-height));
   }
 
   .center {
@@ -144,7 +146,6 @@
   .actions {
     display: flex;
     justify-content: flex-end;
-    background: var(--background-color);
 
     padding: 0.5rem 1rem 0 0.5rem;
   }
@@ -170,7 +171,7 @@
       position: fixed;
       right: 0;
       width: 0;
-      height: 100vh;
+      height: 100svh;
 
       box-shadow: none !important;
     }

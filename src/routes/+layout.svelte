@@ -10,8 +10,25 @@
   import Footer from "$lib/components/Footer.svelte";
   import Cart from "$lib/components/Cart/Cart.svelte";
   import Portal from "svelte-portal";
+  import { isCartOpen } from "$lib/stores/cart";
+  import { mobileMenuOpen } from "$lib/stores/menu";
+  import { isFormOpen } from "$lib/stores/form";
 
   let { children } = $props();
+
+  let noScroll = $state(false);
+  let noScrollMobile = $state(false);
+
+  $effect(() => {
+    noScroll = $mobileMenuOpen || $isFormOpen;
+    noScrollMobile = $isCartOpen || $mobileMenuOpen || $isFormOpen;
+
+    document.documentElement.classList.toggle("no-scroll", noScroll);
+    document.documentElement.classList.toggle(
+      "no-scroll-mobile",
+      noScrollMobile
+    );
+  });
 
   $effect(() => {
     AOS.init({
@@ -20,7 +37,7 @@
   });
 </script>
 
-<main data-aos="fade-in">
+<main data-aos="fade-in" data-aos-duration="1500">
   <Header />
 
   <div class="screen">
@@ -46,7 +63,11 @@
   main {
     display: flex;
     flex-direction: column;
-    min-height: 100vh;
+    min-height: 100svh;
+  }
+
+  :global(html.no-scroll) {
+    overflow: hidden;
   }
 
   .screen {
@@ -60,7 +81,17 @@
 
   .content {
     width: 100%;
-    min-height: calc(100vh - var(--header-height));
+    min-height: calc(100svh - var(--header-height));
     box-sizing: border-box;
+  }
+
+  :global(html.no-scroll) {
+    overflow: hidden;
+  }
+
+  @media (max-width: 768px) {
+    :global(html.no-scroll-mobile) {
+      overflow: hidden;
+    }
   }
 </style>

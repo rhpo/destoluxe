@@ -8,13 +8,13 @@
 
   import type { Order, Product } from "$lib/types";
   import { cart } from "$lib/stores/cart";
+  import { closeForm, isFormOpen } from "$lib/stores/form";
 
   interface Props {
     onsubmit?: (orderData: Order) => void;
-    show?: boolean;
   }
 
-  let { show = $bindable(), onsubmit = () => {} }: Props = $props();
+  let { onsubmit = () => {} }: Props = $props();
 
   let formData: Order = $state({
     cart: $cart,
@@ -89,22 +89,22 @@
   }
 
   function close() {
-    show = false;
+    closeForm();
   }
 
   function overlayClick(e: MouseEvent) {
     if (e.target === e.currentTarget) {
-      show = false;
+      close();
     }
   }
 </script>
 
-{#if show}
+{#if $isFormOpen}
   <div
     class="overlay"
     tabindex="0"
     onclick={overlayClick}
-    onkeydown={(e) => e.key === "Escape" && (show = false)}
+    onkeydown={(e) => e.key === "Escape" && close()}
     role="dialog"
     aria-modal="true"
     transition:fly
@@ -227,11 +227,11 @@
   }
 
   .modal {
-    background: var(--background-color);
+    background: var(--background-light);
     padding: 3rem;
     max-width: 600px;
     width: 90%;
-    max-height: 90vh;
+    max-height: 70vh;
     overflow-y: auto;
 
     animation: slideIn 0.3s cubic-bezier(0.4, 0, 0.2, 1);

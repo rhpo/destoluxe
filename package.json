@@ -33,7 +33,9 @@
 	"dependencies": {
 		"@types/aos": "^3.0.7",
 		"aos": "^2.3.4",
+		"autoprefixer": "^10.4.21",
 		"svelte-portal": "^2.2.1",
+		"svelte-preprocess": "^6.0.3",
 		"vanilla-tilt-svelte": "^1.0.4"
 	}
 }

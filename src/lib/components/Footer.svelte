@@ -176,5 +176,16 @@
       grid-template-columns: 1fr;
       gap: 2rem;
     }
+
+    li {
+      width: 100%;
+      text-align: center;
+
+      /* fallback for ios safari */
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
   }
 </style>

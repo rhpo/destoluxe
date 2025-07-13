@@ -57,6 +57,8 @@
     justify-content: center;
     align-items: center;
 
+    z-index: 1000;
+
     transition: transform var(--transition-duration) var(--transition-easing);
   }
 

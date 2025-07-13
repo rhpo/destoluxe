@@ -1,19 +1,25 @@
 <script>
   import { ShoppingCart } from "lucide-svelte";
-  import { cart, toggleCart } from "$lib/stores/cart";
+  import { cart, isCartOpen, toggleCart } from "$lib/stores/cart";
   import { blur } from "svelte/transition";
 </script>
 
-<button class="cart" onclick={toggleCart} aria-label="Panier">
+<button onclick={toggleCart} aria-label="Panier" class:open={$isCartOpen}>
   {#if $cart.length > 0}
     <span class="count" transition:blur>{$cart.length}</span>
   {/if}
 
-  <ShoppingCart size={22} />
+  <div class="icon">
+    <ShoppingCart size={22} />
+  </div>
 </button>
 
 <style>
-  .cart {
+  .icon {
+    transform: translate(-1px, 1px);
+  }
+
+  button {
     position: relative;
     background: none;
     border: none;
@@ -21,11 +27,20 @@
     cursor: pointer;
     padding: 0.5rem;
     border-radius: var(--border-radius);
-    transition: var(--transition);
+
+    display: inline-flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
   }
 
-  .cart:hover {
+  button:hover {
     background: var(--background-light);
+  }
+
+  button.open {
+    background: var(--accent-color);
+    color: var(--background-color);
   }
 
   .count {
@@ -40,5 +55,7 @@
     border-radius: 1rem;
     min-width: 1.25rem;
     text-align: center;
+
+    z-index: 2;
   }
 </style>

@@ -29,7 +29,7 @@
 
 <style>
   .construction-page {
-    min-height: calc(100vh - var(--header-height));
+    min-height: calc(100svh - var(--header-height));
     display: flex;
     flex-direction: column;
     align-items: center;
